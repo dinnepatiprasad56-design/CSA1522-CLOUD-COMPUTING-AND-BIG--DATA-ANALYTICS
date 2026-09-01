@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  YARN Site Configuration for 3-Node Docker Cluster
+-->
+<configuration>
+    <!-- ResourceManager Hostname -->
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>hadoop-master</value>
+        <description>The hostname of the YARN ResourceManager coordinator container.</description>
+    </property>
+
+    <!-- Auxiliary Services (MapReduce Shuffle Provider) -->
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+    </property>
+
+    <!-- ResourceManager Endpoints -->
+    <property>
+        <name>yarn.resourcemanager.webapp.address</name>
+        <value>hadoop-master:8088</value>
+        <description>YARN ResourceManager Web UI (Port 8088).</description>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>hadoop-master:8031</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>hadoop-master:8030</value>
+    </property>
+
+    <!-- NodeManager Resource Constraints (Laptop Friendly) -->
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>2048</value>
+        <description>Amount of physical memory in MB that can be allocated for containers per worker container.</description>
+    </property>
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>256</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>2048</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.resource.cpu-vcores</name>
+        <value>2</value>
+    </property>
+
+    <!-- Disable Virtual Memory Check (Essential for Linux Containers) -->
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+        <description>Disables strict virtual memory ratio checking preventing false OOM container kills.</description>
+    </property>
+
+    <!-- Log Aggregation -->
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+</configuration>

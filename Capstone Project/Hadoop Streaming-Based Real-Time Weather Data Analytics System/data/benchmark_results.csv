@@ -1,0 +1,7 @@
+dataset_name,dataset_size_mb,record_count,worker_nodes,execution_time_s,throughput_records_s,throughput_mb_s,output_size_bytes,status
+weather_10MB.csv,10.0,181991,1,2.447,74373.11,4.09,666,COMPLETED
+weather_10MB.csv,10.0,181991,2,2.497,72883.86,4.0,666,COMPLETED
+weather_50MB.csv,50.0,909968,1,11.413,79730.83,4.38,690,COMPLETED
+weather_50MB.csv,50.0,909968,2,10.542,86318.35,4.74,690,COMPLETED
+weather_100MB.csv,100.0,1819931,1,27.971,65064.92,3.58,691,COMPLETED
+weather_100MB.csv,100.0,1819931,2,28.233,64461.13,3.54,691,COMPLETED

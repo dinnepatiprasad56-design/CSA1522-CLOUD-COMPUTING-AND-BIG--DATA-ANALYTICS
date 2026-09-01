@@ -1,0 +1,123 @@
+version: '3.8'
+
+# ==============================================================================
+# Docker Compose Architecture for 3-Node Hadoop Cluster
+# Project: Hadoop Streaming-Based Real-Time Weather Data Analytics System
+# ==============================================================================
+
+networks:
+  weather-hadoop-network:
+    name: weather-hadoop-network
+    driver: bridge
+
+volumes:
+  namenode_data:
+    name: namenode_data
+  datanode1_data:
+    name: datanode1_data
+  datanode2_data:
+    name: datanode2_data
+  hadoop_logs:
+    name: hadoop_logs
+
+services:
+  # ============================================================================
+  # Container 1: Hadoop Master Node
+  # Services: NameNode, SecondaryNameNode, ResourceManager, JobHistory, Dashboard
+  # ============================================================================
+  hadoop-master:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.hadoop
+    image: weather-hadoop:3.3.6
+    container_name: hadoop-master
+    hostname: hadoop-master
+    restart: unless-stopped
+    environment:
+      - ROLE=master
+    ports:
+      - "9870:9870"   # HDFS NameNode Web UI
+      - "9000:9000"   # HDFS NameNode RPC
+      - "8088:8088"   # YARN ResourceManager Web UI
+      - "19888:19888" # MapReduce JobHistory Server Web UI
+      - "8501:8501"   # Streamlit Analytics Dashboard Web UI
+    volumes:
+      - .:/app
+      - namenode_data:/hadoop/dfs/name
+      - hadoop_logs:/usr/local/hadoop/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 2048M
+        reservations:
+          cpus: '0.50'
+          memory: 512M
+    networks:
+      - weather-hadoop-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://hadoop-master:9870/ || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # ============================================================================
+  # Container 2: Hadoop Worker 1 Node
+  # Services: DataNode, NodeManager
+  # ============================================================================
+  hadoop-worker1:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.hadoop
+    image: weather-hadoop:3.3.6
+    container_name: hadoop-worker1
+    hostname: hadoop-worker1
+    restart: unless-stopped
+    environment:
+      - ROLE=worker
+    volumes:
+      - .:/app
+      - datanode1_data:/hadoop/dfs/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.50'
+          memory: 1536M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    networks:
+      - weather-hadoop-network
+    depends_on:
+      - hadoop-master
+
+  # ============================================================================
+  # Container 3: Hadoop Worker 2 Node
+  # Services: DataNode, NodeManager
+  # ============================================================================
+  hadoop-worker2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.hadoop
+    image: weather-hadoop:3.3.6
+    container_name: hadoop-worker2
+    hostname: hadoop-worker2
+    restart: unless-stopped
+    environment:
+      - ROLE=worker
+    volumes:
+      - .:/app
+      - datanode2_data:/hadoop/dfs/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.50'
+          memory: 1536M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    networks:
+      - weather-hadoop-network
+    depends_on:
+      - hadoop-master

@@ -1,0 +1,68 @@
+# ==============================================================================
+# Weather Anomaly & Alert Thresholds Configuration
+# Used by Mapper/Reducer Analytics, Real-Time Alert Engine, and Streamlit Dashboard
+# ==============================================================================
+
+thresholds:
+  temperature:
+    unit: "°C"
+    critical_high: 42.0
+    warning_high: 38.0
+    warning_low: 12.0
+    critical_low: 5.0
+    description: "Thermal stress alert (Heatwave / Coldwave conditions)"
+
+  humidity:
+    unit: "%"
+    critical_high: 90.0
+    warning_high: 80.0
+    warning_low: 25.0
+    critical_low: 15.0
+    description: "Moisture saturation / Extreme aridity alert"
+
+  rainfall:
+    unit: "mm"
+    critical_high: 65.0  # Torrential rain
+    warning_high: 30.0    # Heavy rain
+    moderate_high: 15.0   # Moderate rain
+    description: "Precipitation flood risk alert"
+
+  wind_speed:
+    unit: "km/h"
+    critical_high: 60.0  # Gale / Cyclone-strength gust
+    warning_high: 40.0   # Strong wind
+    moderate_high: 25.0  # Breezy
+    description: "Wind hazard & storm warning"
+
+  pressure:
+    unit: "hPa"
+    critical_low: 970.0   # Deep cyclonic depression
+    warning_low: 990.0    # Low pressure system
+    warning_high: 1025.0  # Intense anticyclone
+    description: "Barometric anomaly detection"
+
+anomaly_categories:
+  - id: "HEATWAVE"
+    rule: "temperature >= 40.0 and humidity <= 40.0"
+    severity: "CRITICAL"
+    advisory: "Severe heatwave alert. Stay hydrated, avoid midday sun."
+
+  - id: "CYCLONE_ALERT"
+    rule: "pressure <= 985.0 and wind_speed >= 45.0 and rainfall >= 25.0"
+    severity: "CRITICAL"
+    advisory: "Potential cyclone/tropical depression. Secure loose items and stay indoors."
+
+  - id: "FLASH_FLOOD_RISK"
+    rule: "rainfall >= 50.0"
+    severity: "CRITICAL"
+    advisory: "High risk of urban flooding. Avoid low-lying routes."
+
+  - id: "THUNDERSTORM_WARNING"
+    rule: "rainfall >= 20.0 and wind_speed >= 35.0 and humidity >= 80.0"
+    severity: "WARNING"
+    advisory: "Severe thunderstorm activity reported. Watch for lightning and squalls."
+
+  - id: "HIGH_HUMIDEX"
+    rule: "temperature >= 35.0 and humidity >= 75.0"
+    severity: "WARNING"
+    advisory: "High heat index (oppressive mugginess). Limit strenuous outdoor activity."

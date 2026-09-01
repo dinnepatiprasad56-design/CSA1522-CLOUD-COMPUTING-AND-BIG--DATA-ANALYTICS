@@ -1,0 +1,14 @@
+# Core Big Data & Data Processing
+pyyaml>=6.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualization & Dashboard
+streamlit>=1.30.0
+plotly>=5.18.0
+
+# Testing & Code Quality
+pytest>=7.4.0
+pytest-mock>=3.12.0

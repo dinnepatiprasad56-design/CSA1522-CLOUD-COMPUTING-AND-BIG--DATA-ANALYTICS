@@ -1,0 +1,3 @@
+timestamp,city,temperature,humidity,rainfall,wind_speed,pressure
+2026-08-18T08:00:00,Chennai,32.0,75.0,0.0,15.0,1008.0
+2026-08-18T09:00:00,Chennai,34.0,70.0,0.0,12.0,1008.0

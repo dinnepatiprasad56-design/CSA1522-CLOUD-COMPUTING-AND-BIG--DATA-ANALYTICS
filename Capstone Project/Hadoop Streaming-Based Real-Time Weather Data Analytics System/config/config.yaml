@@ -1,0 +1,86 @@
+# ==============================================================================
+# Master Configuration for Hadoop Weather Analytics System
+# ==============================================================================
+
+cluster:
+  name: "weather-hadoop-cluster"
+  master_node:
+    hostname: "hadoop-master"
+    private_ip: "${MASTER_PRIVATE_IP:127.0.0.1}"
+  worker_nodes:
+    - hostname: "hadoop-worker-1"
+      private_ip: "${WORKER1_PRIVATE_IP:127.0.0.1}"
+    - hostname: "hadoop-worker-2"
+      private_ip: "${WORKER2_PRIVATE_IP:127.0.0.1}"
+
+hdfs:
+  root_dir: "/weather"
+  raw_dir: "/weather/raw"
+  processed_dir: "/weather/processed"
+  output_dir: "/weather/output"
+  archive_dir: "/weather/archive"
+  logs_dir: "/weather/logs"
+  replication_factor: 2
+  block_size_mb: 128
+
+streaming:
+  jar_path: "${HADOOP_STREAMING_JAR:/usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.6.jar}"
+  default_num_reducers: 2
+
+cities:
+  - name: "Chennai"
+    lat: 13.0827
+    lon: 80.2707
+    base_temp: 32.0
+    base_humidity: 75.0
+    base_pressure: 1008.0
+  - name: "Bengaluru"
+    lat: 12.9716
+    lon: 77.5946
+    base_temp: 24.5
+    base_humidity: 60.0
+    base_pressure: 915.0
+  - name: "Hyderabad"
+    lat: 17.3850
+    lon: 78.4867
+    base_temp: 29.0
+    base_humidity: 55.0
+    base_pressure: 955.0
+  - name: "Mumbai"
+    lat: 19.0760
+    lon: 72.8777
+    base_temp: 30.5
+    base_humidity: 80.0
+    base_pressure: 1010.0
+  - name: "Delhi"
+    lat: 28.6139
+    lon: 77.2090
+    base_temp: 34.0
+    base_humidity: 45.0
+    base_pressure: 980.0
+  - name: "Kolkata"
+    lat: 22.5726
+    lon: 88.3639
+    base_temp: 31.0
+    base_humidity: 82.0
+    base_pressure: 1006.0
+  - name: "Pune"
+    lat: 18.5204
+    lon: 73.8567
+    base_temp: 26.5
+    base_humidity: 62.0
+    base_pressure: 950.0
+
+ingestion:
+  mode: "SIMULATOR" # Options: SIMULATOR, API
+  batch_interval_seconds: 10
+  records_per_batch: 7
+  buffer_flush_count: 50
+  output_format: "csv"
+  csv_header: "timestamp,city,temperature,humidity,rainfall,wind_speed,pressure"
+
+dashboard:
+  title: "Cloud Weather Analytics & Anomaly Detection Dashboard"
+  host: "0.0.0.0"
+  port: 8501
+  refresh_interval_seconds: 15

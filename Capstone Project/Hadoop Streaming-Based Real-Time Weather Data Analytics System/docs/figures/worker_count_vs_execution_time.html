@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Execution Time Comparison: 1 Worker vs 2 Worker Nodes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 900px;
+            width: 100%;
+        }
+        h2 { color: #38bdf8; margin-top: 0; margin-bottom: 5px; font-size: 1.5rem; }
+        p.subtitle { color: #94a3b8; font-size: 0.95rem; margin-bottom: 25px; }
+        .chart-container { background: #0b1120; border-radius: 12px; padding: 20px; text-align: center; }
+        svg { max-width: 100%; height: auto; }
+        .footer { margin-top: 20px; font-size: 0.8rem; color: #64748b; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Execution Time Comparison: 1 Worker vs 2 Worker Nodes</h2>
+        <p class="subtitle">Analysis of distributed partitioning overhead vs compute speedup</p>
+        <div class="chart-container">
+            
+    <svg width="750" height="380" viewBox="0 0 750 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- Axes -->
+        <line x1="80" y1="40" x2="80" y2="300" stroke="#334155" stroke-width="2"/>
+        <line x1="80" y1="300" x2="700" y2="300" stroke="#334155" stroke-width="2"/>
+
+        <!-- 10 MB Group -->
+        <rect x="140" y="260" width="35" height="40" fill="#ef4444" rx="3"/>
+        <rect x="180" y="260" width="35" height="40" fill="#10b981" rx="3"/>
+        <text x="177" y="325" fill="#94a3b8" font-size="12" text-anchor="middle">10 MB</text>
+
+        <!-- 50 MB Group -->
+        <rect x="360" y="80" width="35" height="220" fill="#ef4444" rx="3"/>
+        <text x="377" y="70" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">16.98s</text>
+        <rect x="400" y="75" width="35" height="225" fill="#10b981" rx="3"/>
+        <text x="417" y="65" fill="#10b981" font-size="11" font-weight="bold" text-anchor="middle">17.47s</text>
+        <text x="397" y="325" fill="#94a3b8" font-size="12" text-anchor="middle">50 MB</text>
+
+        <!-- Legend -->
+        <rect x="520" y="50" width="16" height="16" fill="#ef4444" rx="3"/>
+        <text x="545" y="63" fill="#f8fafc" font-size="13">1 Worker</text>
+        <rect x="520" y="75" width="16" height="16" fill="#10b981" rx="3"/>
+        <text x="545" y="88" fill="#f8fafc" font-size="13">2 Workers</text>
+    </svg>
+    
+        </div>
+        <div class="footer">Cloud Hadoop Weather Analytics Capstone Evaluation</div>
+    </div>
+</body>
+</html>

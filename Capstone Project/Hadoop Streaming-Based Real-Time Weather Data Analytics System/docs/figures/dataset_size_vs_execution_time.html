@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dataset Size vs. MapReduce Execution Time</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 900px;
+            width: 100%;
+        }
+        h2 { color: #38bdf8; margin-top: 0; margin-bottom: 5px; font-size: 1.5rem; }
+        p.subtitle { color: #94a3b8; font-size: 0.95rem; margin-bottom: 25px; }
+        .chart-container { background: #0b1120; border-radius: 12px; padding: 20px; text-align: center; }
+        svg { max-width: 100%; height: auto; }
+        .footer { margin-top: 20px; font-size: 0.8rem; color: #64748b; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Dataset Size vs. MapReduce Execution Time</h2>
+        <p class="subtitle">Empirical scaling performance comparison on 1-Worker vs 2-Worker Hadoop Cluster</p>
+        <div class="chart-container">
+            
+    <svg width="750" height="380" viewBox="0 0 750 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid & Axes -->
+        <line x1="80" y1="40" x2="80" y2="300" stroke="#334155" stroke-width="2"/>
+        <line x1="80" y1="300" x2="700" y2="300" stroke="#334155" stroke-width="2"/>
+        <line x1="80" y1="235" x2="700" y2="235" stroke="#1e293b" stroke-dasharray="4"/>
+        <line x1="80" y1="170" x2="700" y2="170" stroke="#1e293b" stroke-dasharray="4"/>
+        <line x1="80" y1="105" x2="700" y2="105" stroke="#1e293b" stroke-dasharray="4"/>
+        
+        <!-- Y-Axis Labels -->
+        <text x="70" y="305" fill="#94a3b8" font-size="12" text-anchor="end">0s</text>
+        <text x="70" y="240" fill="#94a3b8" font-size="12" text-anchor="end">5s</text>
+        <text x="70" y="175" fill="#94a3b8" font-size="12" text-anchor="end">10s</text>
+        <text x="70" y="110" fill="#94a3b8" font-size="12" text-anchor="end">15s</text>
+        <text x="70" y="45" fill="#94a3b8" font-size="12" text-anchor="end">20s</text>
+        
+        <!-- X-Axis Labels -->
+        <text x="180" y="325" fill="#94a3b8" font-size="12" text-anchor="middle">10 MB</text>
+        <text x="420" y="325" fill="#94a3b8" font-size="12" text-anchor="middle">50 MB</text>
+        <text x="640" y="325" fill="#94a3b8" font-size="12" text-anchor="middle">100 MB</text>
+
+        <!-- Traces 1 Worker vs 2 Workers -->
+        <!-- 1 Worker Line (Red) -->
+        <polyline fill="none" stroke="#ef4444" stroke-width="3" points="180,261 420,80 640,45"/>
+        <circle cx="180" cy="261" r="6" fill="#ef4444"/>
+        <circle cx="420" cy="80" r="6" fill="#ef4444"/>
+        <circle cx="640" cy="45" r="6" fill="#ef4444"/>
+
+        <!-- 2 Worker Line (Green) -->
+        <polyline fill="none" stroke="#10b981" stroke-width="3" points="180,261 420,73 640,42"/>
+        <circle cx="180" cy="261" r="6" fill="#10b981"/>
+        <circle cx="420" cy="73" r="6" fill="#10b981"/>
+        <circle cx="640" cy="42" r="6" fill="#10b981"/>
+
+        <!-- Legend -->
+        <rect x="520" y="50" width="16" height="16" fill="#ef4444" rx="3"/>
+        <text x="545" y="63" fill="#f8fafc" font-size="13">1 Worker Node</text>
+        <rect x="520" y="75" width="16" height="16" fill="#10b981" rx="3"/>
+        <text x="545" y="88" fill="#f8fafc" font-size="13">2 Worker Nodes</text>
+    </svg>
+    
+        </div>
+        <div class="footer">Cloud Hadoop Weather Analytics Capstone Evaluation</div>
+    </div>
+</body>
+</html>

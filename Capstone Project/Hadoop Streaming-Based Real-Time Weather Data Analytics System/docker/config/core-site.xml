@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Hadoop Core Configuration for 3-Node Docker Cluster
+-->
+<configuration>
+    <!-- Default FileSystem URI pointing to Container hadoop-master NameNode -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop-master:9000</value>
+        <description>NameNode URI and RPC port.</description>
+    </property>
+
+    <!-- Base Temporary Directory for Hadoop Runtime Data -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/tmp/hadoop-root</value>
+        <description>Base for temporary directories.</description>
+    </property>
+
+    <!-- I/O Buffer Size Optimization -->
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>131072</value>
+        <description>Buffer size (128KB) for sequence and streaming files.</description>
+    </property>
+
+    <!-- Static User Mapping -->
+    <property>
+        <name>hadoop.http.staticuser.user</name>
+        <value>root</value>
+        <description>Default user for Web UI exploration.</description>
+    </property>
+</configuration>

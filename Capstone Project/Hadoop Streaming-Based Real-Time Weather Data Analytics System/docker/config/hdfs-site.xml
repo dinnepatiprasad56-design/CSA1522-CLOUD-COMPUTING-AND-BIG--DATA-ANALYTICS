@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Hadoop Distributed File System (HDFS) Configuration for 3-Node Docker Cluster
+-->
+<configuration>
+    <!-- Replication Factor matched to 2 Worker Containers -->
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+        <description>Default block replication count across cluster DataNodes.</description>
+    </property>
+
+    <!-- NameNode Metadata Storage Directory (Mounted Persistent Volume) -->
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///hadoop/dfs/name</value>
+        <description>Persistent NameNode metadata storage directory.</description>
+    </property>
+
+    <!-- DataNode Block Storage Directory (Mounted Persistent Volume) -->
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///hadoop/dfs/data</value>
+        <description>Persistent DataNode block storage directory.</description>
+    </property>
+
+    <!-- Secondary NameNode Checkpoint Directory -->
+    <property>
+        <name>dfs.namenode.checkpoint.dir</name>
+        <value>file:///hadoop/dfs/namesecondary</value>
+        <description>Secondary NameNode checkpoint directory.</description>
+    </property>
+
+    <!-- NameNode Web UI Address -->
+    <property>
+        <name>dfs.namenode.http-address</name>
+        <value>hadoop-master:9870</value>
+        <description>NameNode Web UI listening address.</description>
+    </property>
+
+    <!-- Secondary NameNode Web UI Address -->
+    <property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>hadoop-master:9868</value>
+        <description>Secondary NameNode Web UI listening address.</description>
+    </property>
+
+    <!-- Default HDFS Block Size (128 MB) -->
+    <property>
+        <name>dfs.blocksize</name>
+        <value>134217728</value>
+        <description>Default HDFS block size (128MB).</description>
+    </property>
+
+    <!-- WebHDFS REST API -->
+    <property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+        <description>Enables WebHDFS REST API access for ingestion pipelines.</description>
+    </property>
+
+    <!-- POSIX Permissions Checking -->
+    <property>
+        <name>dfs.permissions.enabled</name>
+        <value>false</value>
+        <description>Disable POSIX permissions for local Docker sandbox execution.</description>
+    </property>
+</configuration>

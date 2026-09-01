@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Hadoop Core Configuration Template
+  Defines cluster filesystem URI and shared I/O buffer settings.
+-->
+<configuration>
+    <!-- Default FileSystem URI pointing to Master NameNode -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop-master:9000</value>
+        <description>The NameNode URI and RPC server port.</description>
+    </property>
+
+    <!-- Base Temporary Directory for Hadoop Runtime Data -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/usr/local/hadoop/data/tmp</value>
+        <description>A base for other temporary directories.</description>
+    </property>
+
+    <!-- I/O Buffer Size Optimization -->
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>131072</value>
+        <description>Buffer size (128KB) for sequence and streaming files.</description>
+    </property>
+
+    <!-- Static User Mapping -->
+    <property>
+        <name>hadoop.http.staticuser.user</name>
+        <value>ubuntu</value>
+        <description>Default user for Web UI exploration.</description>
+    </property>
+</configuration>
